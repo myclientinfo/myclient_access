@@ -108,11 +108,7 @@ class Encrypt
     	return $array;
     }
     
-    function loadKey($id){
-    	$key = file_get_contents(KEY_LOC.$id.'.key');
-		$this->key = $key;
-		return $key;
-	}
+    
 
 } 
 ?>

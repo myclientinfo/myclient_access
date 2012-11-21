@@ -391,17 +391,20 @@ class Site{
 		return array_map('stripslashes', $data);
     }
 	
-	public function runQuery($query){
-		$result = $GLOBALS['db']->query($query);
+	public function runQuery($query, $conn = false){
+		$db = $conn ? $conn : $GLOBALS['db'];
+		
+		$result = $db->query($query);
+		
 		if(!isset($this)) return true;
 		//$result = mysql_query($query);
 		if(!$result){
 			$GLOBALS['debug']->query_fail($query, true);
 		} else {
-			if($GLOBALS['db']->insert_id == ''){
+			if($db->insert_id == ''){
 				return $_POST[$this->table_fields[0]];
 			} else {
-				return $GLOBALS['db']->insert_id;
+				return $db->insert_id;
 			}
 		}
 	}

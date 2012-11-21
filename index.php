@@ -1,13 +1,10 @@
 <?php 
-include_once '../classes/config.php';
+
+include_once 'classes/config.php';
 
 $auth = new Auth();
-//$GLOBALS['debug']->printr($_SESSION['user']);
-if(isset($_GET['log_out'])){
-	Auth::logOut();
-	header('location:/');
-	die();
-}
+
+
 
 if(!$auth->isLoggedIn()) {
 

@@ -10,6 +10,7 @@ class Data extends Site{
 	function __construct($id = false, $list = false){
 		if($id){
 			$this->key = $this->loadKey($id);
+			
 			$this->encrypt = new Encrypt($this->key);
 		}
 		
@@ -122,8 +123,9 @@ class Data extends Site{
     }
     
     function decryptArray($data, $decrypt_keys = false, $key = false, $skip = array()){
-    	
+    	$GLOBALS['debug']->printr($this);
     	if(!$key && $this->key==''){
+    		echo 'j'.$this->id;
     		$key = $this->loadKey($this->id);
     	} else if($this->key != '') {
     		$key = $this->key;
@@ -165,8 +167,14 @@ class Data extends Site{
     }
 	
 	function loadKey($id){
-		$key = file_get_contents(KEY_LOC.$id.'.key');
-		$this->key = $key;
+		$db = Agency::connectUtils();
+		$query = 'SELECT user_key FROM user_keys WHERE agency_id = '.$id;
+		
+		$result = $db->query($query);
+		while($row = $result->fetch_assoc()){
+			$key = $row['user_key'];
+		}
+		Agency::closeUtils($db);
 		return $key;
 	}
 	

@@ -15,7 +15,32 @@ class Agency extends Site{
 		'account_type_id' => array('type' => 'select', 'link' => 'true', 'table' => 'account_types', 'as' => 'at', 'on' => 'ac.id = co.account_type_id')
 	);
 	
+	
+	function connectUtils(){
+		if($_SERVER['HTTP_HOST'] == $GLOBALS['project'] || $_SERVER['HTTP_HOST'] == 'myclientinfo' || $_SERVER['HTTP_HOST'] == 'mci-access' ){
+			$db = new mysqli($_SERVER['DB2_HOST'], $_SERVER['DB2_USER'], $_SERVER['DB2_PASS'], $_SERVER['DB2_NAME']) or die('is fucked');
+		} else {
+			$db = new mysqli($_SERVER['DB2_HOST'], $_SERVER['DB2_USER'], $_SERVER['DB2_PASS'], $_SERVER['DB2_NAME'], ini_get("mysqli.default_port"), "/var/lib/mysql/mysql.sock");
+		}
+		return $db;
+	}
+	
+	function closeUtils($db){
+		$db->close();
+	}
+	
 	function createAgencyKey($id){
+		
+		$db = Agency::connectUtils();
+		
+		$unique = $this->getUniqueCode(32);
+		
+		$db->runQuery('INSERT INTO user_keys(agency_id, user_key) VALUES('.$id.', "'.$unique.'")');
+		
+		return $unique;
+		
+		
+		/*
 		if(!file_exists(KEY_LOC.$id.'.key')){
 			$text = $this->getUniqueCode(32);
 			if(!file_put_contents(KEY_LOC.$id.'.key', $text)){
@@ -27,6 +52,7 @@ class Agency extends Site{
 				
 			}
 		}
+		*/
 		
 	}
 	
@@ -49,5 +75,3 @@ class Agency extends Site{
 	}
 	
 }	
-?>
-

@@ -1,5 +1,5 @@
 <?php 
-include_once '../../classes/config.php';
+include_once '../classes/config.php';
 
 $auth = new Auth();
 if(!$auth->isLoggedIn()) {
