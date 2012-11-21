@@ -1,5 +1,6 @@
 <?php
 $client_title_name = false;
+$project_title_name = false;
 if(isset($_GET['client_id'])){
 	$client_id = @Site::urlIn($_GET['client_id']);
 	if($client_id && isset($clients[$client_id])){
@@ -8,6 +9,17 @@ if(isset($_GET['client_id'])){
 		$clients = $temp_cl_array;
 	}
 }
+
+if(isset($_GET['project_id'])){
+	$client_id = @Site::urlIn($_GET['project_id']);
+	if($client_id && isset($clients[$client_id])){
+		$temp_cl_array[] = $clients[$client_id];
+		$client_title_name = $clients[$client_id]['name'];
+		$clients = $temp_cl_array;
+	}
+}
+$GLOBALS['debug']->printr($_GET['project_id']);
+$GLOBALS['debug']->printr($projects);
 ?>
 
 
