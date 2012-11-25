@@ -1,6 +1,7 @@
 RewriteEngine on
 
 
+
 RewriteRule ^(index|clients|projects|account|datasets|users)(/)*$ $1.php
 RewriteRule ^(users)/(permissions)(/)*$ user_access.php [L]
 RewriteRule ^(projects)/(permissions)(/)*$ project_access.php [L]
