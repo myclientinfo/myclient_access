@@ -36,7 +36,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'].'/classes/class.debug.php')){
 	$GLOBALS['debug']->debugStatus(true);	
 }
 
-if(!$_SESSION['data']->td && isset($_SESSION['user']['id'])){
+if(!isset($_SESSION['data'])  && isset($_SESSION['user']['id'])){
 	$_SESSION['data'] = new Data($_SESSION['user']['id']);
 	
 }
