@@ -51,6 +51,7 @@ class User extends Site{
 		
 		$user = new User(false, false);
 		$_POST['company_id'] = $company_id;
+		$_POST['active'] = 0;
 		return $user->save();
 	
 	}

@@ -35,7 +35,7 @@ class Agency extends Site{
 		
 		$unique = $this->getUniqueCode(32);
 		
-		$db->runQuery('INSERT INTO user_keys(agency_id, user_key) VALUES('.$id.', "'.$unique.'")');
+		$db->query('INSERT INTO user_keys(agency_id, user_key) VALUES('.$id.', "'.$unique.'")');
 		
 		return $unique;
 		

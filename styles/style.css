@@ -5,20 +5,18 @@ body {
 	background-color: #E8E8E8;
 	font-size: 14px;
 	color: #637c8b;
-	
-background-image: linear-gradient(bottom, #BFBDBF 0%, #EBE8EB 100%);
-background-image: -o-linear-gradient(bottom, #BFBDBF 0%, #EBE8EB 100%);
-background-image: -moz-linear-gradient(bottom, #BFBDBF 0%, #EBE8EB 100%);
-background-image: -webkit-linear-gradient(bottom, #BFBDBF 0%, #EBE8EB 100%);
-background-image: -ms-linear-gradient(bottom, #BFBDBF 0%, #EBE8EB 100%);
+background: #f7fbfc; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmN2ZiZmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIzMiUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZTVlNWU1IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-radial-gradient(center, ellipse cover,  #f7fbfc 0%, #f2f2f2 32%, #e5e5e5 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#f7fbfc), color-stop(32%,#f2f2f2), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  #f7fbfc 0%,#f2f2f2 32%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  #f7fbfc 0%,#f2f2f2 32%,#e5e5e5 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  #f7fbfc 0%,#f2f2f2 32%,#e5e5e5 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  #f7fbfc 0%,#f2f2f2 32%,#e5e5e5 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7fbfc', endColorstr='#e5e5e5',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
 
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, #BFBDBF),
-	color-stop(1, #EBE8EB)
-);
+
 }
 
 
@@ -28,10 +26,65 @@ h1, h2, h3, h4 {
 	
 }
 
+h1 {
+	background-image: url(/images/logo.png);
+	height: 299px;
+	width: 700px;
+	margin-top: 30px;
+}
+
 h2 {
 	font-size: 38px;
 	color: #637c8b;
 	margin-bottom: 15px;
+}
+
+
+#content_outer.index h2 {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+
+
+#content_outer.index form#signup_form {
+	border-radius: 3px;
+	width: 300px;
+	background-color: #F7F7F7;
+	overflow: hidden;
+	padding: 10px;
+	
+	border: 1px solid #cdd0d3;
+	
+	background-image: linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
+	background-image: -o-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
+	background-image: -moz-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
+	background-image: -webkit-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
+	background-image: -ms-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.38, #F2F2F2),
+		color-stop(0.55, #F7F7F7),
+		color-stop(0.84, #FEFEFE)
+	);
+	
+	color: #999999;
+	
+	box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.40);
+    -webkit-box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.40);
+    margin-bottom: 80px;
+    float: right;
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+
+#content_outer.index form#signup_form label {
+	width: 100px;
 }
 
 h2 span.lsf {
@@ -43,7 +96,11 @@ h3 {
 	color: #637c8b;
 }
 
-
+#content_outer.index p {
+	line-height: 1.3em;
+	margin-bottom: 10px;
+	
+}
 
 
 a {
@@ -167,7 +224,7 @@ label {
 	top: 19px;
 }
 
-#dashboard {
+#dashboard, .box_out {
 	border-radius: 4px;
 	background-color: #F7F7F7;
 	margin-top: 20px;
@@ -190,6 +247,10 @@ label {
 		color-stop(0.55, #F7F7F7),
 		color-stop(0.92, #FEFEFE)
 	);
+}
+
+#content_outer.index div.box_out h2 {
+	margin-top: 5px;
 }
 
 #dashboard p {

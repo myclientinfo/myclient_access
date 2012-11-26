@@ -123,7 +123,6 @@ class Data extends Site{
     }
     
     function decryptArray($data, $decrypt_keys = false, $key = false, $skip = array()){
-    	$GLOBALS['debug']->printr($this);
     	if(!$key && $this->key==''){
     		echo 'j'.$this->id;
     		$key = $this->loadKey($this->id);
