@@ -1,5 +1,5 @@
 <?php 
-require_once '../../classes/config.php';
+require_once '../classes/config.php';
 
 $auth = new Auth();
 if(!$auth->isLoggedIn()) {
@@ -17,6 +17,7 @@ if(!empty($_POST) && isset($_POST['access_type_id'])){
 	$query = 'UPDATE users SET last_project = '.$id.' WHERE id = '.$_SESSION['user']['id'];
 	$_SESSION['user']['last_project'] = $id;
 	@Site::runQuery($query);
+	die();
 }
 
 $clients = new Client(false, true);
@@ -56,7 +57,6 @@ echo Site::drawForm('new_project');
 echo Site::drawHidden('delete_form', 0);
 echo Site::drawHidden('access_type_changed', 0);
 echo Site::drawHidden('id', @(int)$_POST['id']);
-echo Site::drawHidden('client_id', $_POST['client_id']);
 echo Site::drawText('name', @$data['name'], 'Name');
 echo Site::drawSelect('access_type_id', $access_array, $data['access_type_id'], 1, 'Access');
 echo Site::drawSelect('client_id', $client_array, $data['client_id'], 1, 'Client');

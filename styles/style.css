@@ -300,6 +300,27 @@ div.client_header form {
 	left: 7px;
 }
 
+
+div.client_header a.lsf {
+	float: right;
+	color: #004DFF;
+	text-decoration: none;
+}
+
+div.client_header span.icon {
+	font-size: 24px;
+	margin-right: 10px;
+	position: absolute;
+	
+}
+
+div.client_header span.client_name {
+	margin-left: 30px;
+}
+
+
+
+
 #alert_box input[type=text] {
 	
 }
@@ -527,7 +548,6 @@ div.client_header {
 div.horizontal_bar {
 	margin: 10px 0px;
 	font-size: 18px;
-	background-color: #F7F7F7;
 	border-radius: 3px;
 	font-weight: bold;
 	margin-top: 20px;
@@ -614,16 +634,33 @@ div.horizontal_bar.active {
 
 
 
-div.horizontal_bar div.edit, div.horizontal_bar div.perms {
+div.horizontal_bar div.edit, div.horizontal_bar div.perms, div.horizontal_bar a.next {
 	float: right;
 	color: #004DFF;
 	font-size: 16px;
 	padding: 9px;
+	text-decoration: none;
+}
+
+div.horizontal_bar div.icon {
+	float: left;
+	font-size: 30px;
+	padding: 0px 2px 0px 10px;
 }
 
 div.horizontal_bar div.perms {
 	padding-left: 0px;
 	display: none;
+}
+
+.display_none {
+	display: none;
+}
+
+div.hide_client div.client_box div.horizontal_bar {
+	border: 0px solid #ebebeb;
+	background-color: none;
+	background-image: none;
 }
 
 
@@ -641,7 +678,7 @@ div.bar_text {
 	cursor: pointer;
 	float: left;
 	padding: 8px;
-	width: 520px;
+	width: 475px;
 }
 
 #access_user_list {
@@ -651,39 +688,38 @@ div.bar_text {
 
 
 div.active {
-	background-color: #FFA07A;
+	//background-color: #FFA07A;
 }
 
 
+button.edit_project, button.project_permission, button.add_data {
+	background-image: none;
+	background-color: transparent;
+	color: #004DFF;
+}
+
+div.client_active div.project div.horizontal_bar {
+	background-color: transparent;
+	background-image: none;
+	border-width: 0px;
+	border-bottom-width: 1px;
+}
+
+div.active > a.next {
+	rotation-point:50% 50%;
+	rotation:90deg;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+}
+
 div.project_header {
-	margin: 15px 15px;
+	margin: 15px 0px;
 	font-size: 15px;
-	background-color: #66ee55;
 	color: #637c8b;
-	padding: 8px;
 	cursor: pointer;
-	margin-top: -7px;
-	padding-left: 15px;
 	border-radius: 2px;
-	
-	
 	border: 1px solid #cdd0d3;
 	
-	background-image: linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
-	background-image: -o-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
-	background-image: -moz-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
-	background-image: -webkit-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
-	background-image: -ms-linear-gradient(bottom, #F2F2F2 38%, #F7F7F7 55%, #FEFEFE 84%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.38, #F2F2F2),
-		color-stop(0.55, #F7F7F7),
-		color-stop(0.84, #FEFEFE)
-	);
-
 }
 
 div.project_box, div.client_box {
@@ -698,7 +734,6 @@ form#add_client {
 
 div.project_box {
 	padding-bottom: 0px;
-	width: 568px;
 	margin: 0px auto;
 }
 

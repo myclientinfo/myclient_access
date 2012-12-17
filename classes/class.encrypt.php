@@ -3,7 +3,7 @@
 class Encrypt 
 { 
    
-  private $td; 
+  var $td; 
      var $key;
      
   // this gets called when class is instantiated 
@@ -28,7 +28,7 @@ class Encrypt
 
     // set mcrypt mode and cipher 
     $this->td = mcrypt_module_open($algorithm, '', $mode, '') ; 
-
+    
     // Unix has better pseudo random number generator then mcrypt, so if it is available lets use it! 
     $random_seed = strstr(PHP_OS, "WIN") ? MCRYPT_RAND : MCRYPT_DEV_RANDOM; 
 

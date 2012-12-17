@@ -8,7 +8,7 @@ if(!$auth->isLoggedIn()) {
 } 
 
 
-if(!empty($_POST)&&$_POST['save_data']==1){
+if(!empty($_POST)&&@$_POST['save_data']==1){
 	if($_POST['type']=='add'){
 		$data = new Data();
 		$data->saveNew();

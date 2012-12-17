@@ -18,8 +18,8 @@ if(isset($_GET['project_id'])){
 		$clients = $temp_cl_array;
 	}
 }
-$GLOBALS['debug']->printr($_GET['project_id']);
-$GLOBALS['debug']->printr($projects);
+//$GLOBALS['debug']->printr(@$_GET['project_id']);
+//$GLOBALS['debug']->printr($projects);
 ?>
 
 
@@ -104,12 +104,13 @@ $(document).ready(function(){
 	$(document).on('click', '.client_header', function(){
 		
 		$('.client_header').not($(this)).each(function(){
-			$('.client_box', $(this).parent()).slideUp();
-			
+			$('.client_box', $(this).parent()).hide();
+			$(this).parent().removeClass('client_active');
+			//$(this).parent().removeClass('active');
 		});
 		
-		
-		$('.client_box', $(this).parent()).slideDown();
+		$(this).parent().addClass('client_active');
+		$('.client_box', $(this).parent()).show();
 		
 	}); 
 	
@@ -121,12 +122,12 @@ $(document).ready(function(){
 		$('.project_header').each(function(){
 			
 			if(clicked != $(this)[0]){
-				$('.project_box', $(this).parent()).slideUp();
+				$('.project_box', $(this).parent()).hide();
 			} 
 		});
 		
 		var prj_id = $(this).attr('id').replace('project_header_','');
-		$('.project_box', $(this).parent()).slideDown();
+		$('.project_box', $(this).parent()).show();
 		
 		$.post('/api/last_project.php', {project_id: prj_id}, function(data){
 			
@@ -140,9 +141,6 @@ $(document).ready(function(){
 		
 		var clicked = $(this)[0];
 		
-		console.log($(clicked).attr('id').replace('project_permission_',''));
-		
-		
 		
 	}); 
 	
@@ -150,7 +148,9 @@ $(document).ready(function(){
 	var last_project_box = $('#project_box_<?php echo $_SESSION['user']['last_project']?>');
 	
 	$('.project_box', last_project_box).show();
-	last_project_box.parent().show();
+	$('div.client_header', last_project_box.parent().parent()).click();
+	$('div.project_header', last_project_box.parent().parent()).click();
+	//last_project_box.parent().show();
 	
 	<?php } ?>
 	
@@ -212,25 +212,23 @@ $datasets[] = 'Add';
 	}
 	
 	
-	
-	
-	//$GLOBALS['debug']->printr($clients);
-	
-	
-	
 	foreach($clients as $cl){
-	$client = $cl['name'];
-	$ps = $project_array[$client];
-	
-	
-	
+		$client = $cl['name'];
+		
+		if(isset($project_array[$client])){
+			$ps = $project_array[$client];
+		} else {
+			$ps = array();
+		}
+		
+		
 	?>
 	
-	
-	
-	<div class="client" id="client_box_<?php echo str_replace(' ','_', $client)?>">
-		<div class="client_header" <?php echo $client_title_name?' style="display: none;"':''?>><span class="client_name" id="clients_<?php echo $cl['id']?>"><?php echo $client?></span><span style="font-size: 14px; font-weight: normal"> - Client</span>
-		<a href="/projects/<?php echo Site::urlOut($cl['id'])?>/" class="lsf">&#xe112;</a>
+	<div class="client<?php echo $client_title_name ? ' hide_client' : ''?>" id="client_box_<?php echo str_replace(' ','_', $client)?>">
+		<div class="horizontal_bar client_header<?php echo $client_title_name?' display_none':''?>">
+			<div class="lsf icon">&#xe023;</div>
+			<div class="bar_text" id="clients_<?php echo $cl['id']?>"><?php echo $client?></div>
+			<a href="/projects/<?php echo Site::urlOut($cl['id'])?>/" class="lsf next">&#xe112;</a>
 		</div>
 		<div class="client_box">
 		<?php
@@ -249,33 +247,30 @@ $datasets[] = 'Add';
 			
 			
 		<?php 
-		
-		
-		
 		if(isset($ps) && is_array($ps)){
 		foreach($ps as $q){ ?>
 			<div class="project" id="project_box_<?php echo $q['id'] ?>">
-			<div class="project_header" id="project_header_<?php echo $q['id'] ?>"><span class="project_name" id="projects_<?php echo $q['id'] ?>"><?php echo $q['name']?></span><span style="font-size: 12px; font-weight: normal"> - <?php echo $q['access_type']?> Project</span>
+			<div class="horizontal_bar project_header" id="project_header_<?php echo $q['id'] ?>">
+				<div class="lsf icon">&#xe028;</div>
+				<div class="bar_text project_name" id="projects_<?php echo $q['id'] ?>"><?php echo $q['name']?></div>
+				<a href="/projects/<?php echo Site::urlOut($cl['id'])?>/<?php echo Site::urlOut($q['id'])?>" class="lsf next">&#xe112;</a>
 			</div>
 			<div id="project_box_<?php echo $q['id'] ?>" class="project_box">
-			<button class="styled left edit_project">Edit Project <span class="lsf">&#xe09f;</span></button>
-			<button class="styled left project_permission" id="project_permission_<?php echo $q['id']?>">Permissions <span class="lsf">&#xe07c;</span></button>
+			<button class="styled left edit_project"><span class="lsf">&#xe09f;</span></button>
+			<button class="styled left project_permission" id="project_permission_<?php echo $q['id']?>"><span class="lsf">&#xe07c;</span></button>
 			
 			<?php
 			echo Site::drawForm('form'.$q['id'], '', '', '', false, array('class'=>'add_data'));
 			echo Site::drawHidden('project_id', $q['id']);
 			?>
-			<button class="styled">Add Data <span class="lsf">&#xe108;</span></button>
+			<button class="styled add_data"><span class="lsf">&#xe108;</span></button>
 			<?php
 			//echo Site::drawSubmit('save','Add');
 			echo Site::drawSelect('data_set_id', $datasets, '', '',false, array('class'=>'dataset_select'));
 			echo Site::drawHidden('mode', 'add');
 			echo Site::drawForm();
-			?>
 			
-			
-			
-			<?php if(isset($data[$client][$q['name']])){
+			if(isset($data[$client][$q['name']])){
 				foreach($data[$client][$q['name']] as $ds => $data_groups){ ?>
 					
 					

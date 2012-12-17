@@ -11,24 +11,19 @@ class Auth{
     }
 
     function isLoggedIn(){
-    	
-        if(Auth::checkSession() && Auth::checkLocalCookie()){
-        	//$GLOBALS['debug']->printr('sessionandcookie');
-            Auth::setLocalCookie($_SESSION['user_id']);
+    	if(Auth::checkSession() && Auth::checkLocalCookie()){
+        	Auth::setLocalCookie($_SESSION['user']['id']);
             return true;
         } elseif(Auth::checkSession() && !Auth::checkLocalCookie()) {
-        	//$GLOBALS['debug']->printr('sessionbutnocookie');
-	        Auth::setLocalCookie($_SESSION['user_id']);
+        	Auth::setLocalCookie($_SESSION['user']['id']);
             return true;
         } elseif(!Auth::checkSession() && Auth::checkLocalCookie()) {
-        	//$GLOBALS['debug']->printr('nosessionbutcookie');
         	$user_id = $_COOKIE['user_id'];
             Auth::setLocalCookie($user_id);
             $auth_array = Auth::loadUser($user_id);
             Auth::setSession($auth_array);
             return true;
         } else {
-        	//$GLOBALS['debug']->printr('notadamnthing');
         	return false;
         }
     }

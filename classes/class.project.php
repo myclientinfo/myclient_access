@@ -40,6 +40,7 @@ class Project extends Site{
 	}
 	
 	function save(){
+		echo 'saving';
 		$_POST['name'] = $_SESSION['data']->quickEncrypt($_POST['name']);
 		$_POST['owner_id'] = $_SESSION['user']['id'];
 		return parent::save();

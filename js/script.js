@@ -7,7 +7,13 @@ $(document).ready(function(){
 	});
 	
 	
-	$(document).on('click', 'div.horizontal_bar', function(){
+	$(document).on('click', 'div.client_header.horizontal_bar', function(){
+		$('div.client_header.horizontal_bar').removeClass('active');
+		$(this).toggleClass('active');
+	});
+	
+	$(document).on('click', 'div.project_header.horizontal_bar', function(){
+		$('div.project_header.horizontal_bar', $(this).parent()).removeClass('active');
 		$(this).toggleClass('active');
 	});
 	

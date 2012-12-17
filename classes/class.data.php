@@ -9,7 +9,12 @@ class Data extends Site{
 	
 	function __construct($id = false, $list = false){
 		if($id){
-			$this->key = $this->loadKey($id);
+			if(isset($_SESSION['user']['key']) && $_SESSION['user']['key'] != ''){
+				$this->key = $_SESSION['user']['key'];			
+			} else {
+				$this->key = $this->loadKey($id);
+				$_SESSION['user']['key'] = $this->key;
+			}
 			
 			$this->encrypt = new Encrypt($this->key);
 		}
@@ -104,7 +109,7 @@ class Data extends Site{
 					ORDER BY client_name, project, data_set, order_num';
 		//$GLOBALS['debug']->printr($query);
 		$data = Site::getData($query, false);
-		
+		$new_array = array();
 		$data = $_SESSION['data']->decryptArray($data, false, false, array('value_id'));
 		foreach($data as $d){
 			$new_array[$d['client_name']][$d['project']][$d['group_name']]['groups'][$d['data_group_id']][] = array('field'=>$d['field'], 'value' => $d['value']);
